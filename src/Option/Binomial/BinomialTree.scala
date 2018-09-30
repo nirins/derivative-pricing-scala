@@ -41,7 +41,7 @@ class BinomialTree (
     return getBinomialCoefficient(m, n) * Math.pow(p, m) * Math.pow(1-p, n - m);
   }
  
-  def getPayoff(S: Double, X: Double, optionType: OptionType): Double = {
+  def getPayoff(X: Double, S: Double, optionType: OptionType): Double = {
     optionType match {
       case Call => return Math.max(0.0, X-S);
       case Put => return Math.max(0.0, S-X);

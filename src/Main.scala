@@ -20,26 +20,32 @@ object Main {
   }
   
   def runBinomial(X: Double, S:Double, maturity: Double, volatility: Double, riskFree: Double, optionType: OptionType) = {
+    println("Binomial");
     for(step <- 1 to 1000){
       var tree: BinomialTree = new BinomialTree(X, S, maturity, volatility, riskFree, step, optionType);
       val value = tree.calcOptionValue();
-      println("Binomial", value);
+      println(value);
     }    
   }
   
   def runMonteCarlo(X: Double, S:Double, maturity: Double, volatility: Double, riskFree: Double, optionType: OptionType) = {    
+    println("Monte Carlo");
     val steps = 252;
-    val nSims = 100000;
+    val nSims = 1000;
     val scheme = new EulerDiscretization();
-    var simulator = new MonteCarloSimulator(X, S, maturity, volatility, riskFree, steps, optionType, nSims, scheme);
-    simulator.runSimulation();
-    val value = simulator.calcOptionValue();
-    println("Monte Carlo", value);
+
+    for(i <- 1 to nSims){
+      var simulator = new MonteCarloSimulator(X, S, maturity, volatility, riskFree, steps, optionType, i, scheme);
+      simulator.runSimulation();
+      val value = simulator.calcOptionValue();
+      println(value);      
+    }
   }
   
   def runBlackScholes(X: Double, S:Double, maturity: Double, volatility: Double, riskFree: Double, optionType: OptionType) = {    
     val value = BlackScholesFormula.calcOptionValue(X, S, maturity, volatility, riskFree, optionType);
-    println("Black Scholes", value);
+    println("Black Scholes");
+    println(value);
   }
   
 }

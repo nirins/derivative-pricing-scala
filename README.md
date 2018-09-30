@@ -1,6 +1,1 @@
-# derivative-pricing-scala
-
-##Pricing Option
-###Binomial Model
-###Monte Carlo
-###Black-Scholes
+﻿﻿# derivative-pricing-scala## Pricing European Option    1. Binomial Model        /src/Option/Binomial    2. Monte Carlo        /src/Option/MonteCarlo    3. Black-Scholes        /src/Option/BlackScholes

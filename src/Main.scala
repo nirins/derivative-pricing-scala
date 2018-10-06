@@ -4,19 +4,22 @@ import Option.Binomial._
 import Option.MonteCarlo._
 import Option.MonteCarlo.Discretization._
 import Option.BlackScholes._
+import Swap._
+import java.time._
 
 object Main {
   def main(args: Array[String]): Unit = {
     val X = 100; 
     val S = 95;
-    val maturity = 0.5;
+    val maturity = 1;
     val volatility = 0.3;
     val riskFree = 0.08;
     val optionType = OptionType.Call;
     
-    runBinomial(X, S, maturity, volatility, riskFree, optionType);
-    runMonteCarlo(X, S, maturity, volatility, riskFree, optionType);
-    runBlackScholes(X, S, maturity, volatility, riskFree, optionType);
+//    runBinomial(X, S, maturity, volatility, riskFree, optionType);
+//    runMonteCarlo(X, S, maturity, volatility, riskFree, optionType);
+//    runBlackScholes(X, S, maturity, volatility, riskFree, optionType);
+    runVanillaSwap(maturity);
   }
   
   def runBinomial(X: Double, S:Double, maturity: Double, volatility: Double, riskFree: Double, optionType: OptionType) = {
@@ -46,6 +49,16 @@ object Main {
     val value = BlackScholesFormula.calcOptionValue(X, S, maturity, volatility, riskFree, optionType);
     println("Black Scholes");
     println(value);
+  }
+  
+  def runVanillaSwap(maturity: Double) = {
+    val vs = new VanillaSwap();
+    vs.contructLIBORCurve();
+    val swap_curve = vs.generateSwapCurve(maturity.toInt, LocalDate.of(2007, 1, 1), LocalDate.of(2008, 1, 1));
+    
+    for(s <- swap_curve ){
+      println(s);
+    }
   }
   
 }

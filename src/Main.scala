@@ -6,6 +6,7 @@ import Option.MonteCarlo.Discretization._
 import Option.BlackScholes._
 import Swap._
 import java.time._
+import java.time.format._
 
 object Main {
   def main(args: Array[String]): Unit = {
@@ -16,10 +17,10 @@ object Main {
     val riskFree = 0.08;
     val optionType = OptionType.Call;
     
-//    runBinomial(X, S, maturity, volatility, riskFree, optionType);
-//    runMonteCarlo(X, S, maturity, volatility, riskFree, optionType);
-//    runBlackScholes(X, S, maturity, volatility, riskFree, optionType);
-    runVanillaSwap(maturity);
+    runBinomial(X, S, maturity, volatility, riskFree, optionType);
+    runMonteCarlo(X, S, maturity, volatility, riskFree, optionType);
+    runBlackScholes(X, S, maturity, volatility, riskFree, optionType);
+    runVanillaSwap();
   }
   
   def runBinomial(X: Double, S:Double, maturity: Double, volatility: Double, riskFree: Double, optionType: OptionType) = {
@@ -51,14 +52,19 @@ object Main {
     println(value);
   }
   
-  def runVanillaSwap(maturity: Double) = {
+  def runVanillaSwap() = {
+    println("Vanilla Swap");
+    
+    val from_date = LocalDate.of(1986, 1, 1);
+    val to_date = LocalDate.of(2013, 5, 31);
+    
     val vs = new VanillaSwap();
     vs.contructLIBORCurve();
-    val swap_curve = vs.generateSwapCurve(maturity.toInt, LocalDate.of(2007, 1, 1), LocalDate.of(2008, 1, 1));
+    val swap_curve = vs.generateSwapCurve(from_date, to_date);
     
     for(s <- swap_curve ){
       println(s);
-    }
+    }    
   }
   
 }

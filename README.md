@@ -25,5 +25,10 @@
 
 
 <p align="center">
+  <img src="https://raw.githubusercontent.com/nirins/derivative-pricing-scala/master/output/option03.png" width="auto">
+</p>
+
+
+<p align="center">
   <img src="https://raw.githubusercontent.com/nirins/derivative-pricing-scala/master/output/swap01.png" width="auto">
 </p>

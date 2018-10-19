@@ -1,3 +1,6 @@
+I learnt how to price derivatives from books, online courses, and some websites. Mostly it was about models like Binomial and formulas like Black-Scholes. With few examples, I felt like I kind of understood about them, but was not so sure. So I, as a programmer, thought it would be fun to implement what I learnt into source code. And so I created this project.
+
+
 ## Pricing European Option
     1. Binomial Model
         /src/Option/Binomial

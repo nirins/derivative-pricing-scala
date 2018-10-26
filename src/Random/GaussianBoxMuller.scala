@@ -1,5 +1,6 @@
 package Random
-import math._;
+import math._
+import java.util.concurrent.ThreadLocalRandom
 
 object GaussianBoxMuller {
   def random(): Double = {
@@ -8,8 +9,8 @@ object GaussianBoxMuller {
     var square: Double = 1.0;
     
     while(square >= 1){
-     x = 2 * math.random() - 1; 
-     y = 2 * math.random() - 1; 
+     x = 2 * ThreadLocalRandom.current().nextFloat() - 1; 
+     y = 2 * ThreadLocalRandom.current().nextFloat()  - 1; 
      square = (x * x) + (y * y);
     }
    

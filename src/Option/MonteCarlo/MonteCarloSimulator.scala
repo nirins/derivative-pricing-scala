@@ -19,13 +19,16 @@ class MonteCarloSimulator (
   
   def runSimulation() = {    
     for(i <- 0 until nSims){
-      var simPrice = new SimulatedPrice(assetPrice, maturity, volatility, riskFree, steps, scheme);
-      priceSimArray(i) = simPrice;
-    }
-
-    for(i <- 0 until nSims){
+      priceSimArray(i) = new SimulatedPrice(assetPrice, maturity, volatility, riskFree, steps, scheme);
       priceSimArray(i).simulatePrice();
-    }        
+    }    
+  }
+
+  def runSimulationParallel() = {
+    (0 until nSims).toArray.par.foreach(i => {
+      priceSimArray(i) = new SimulatedPrice(assetPrice, maturity, volatility, riskFree, steps, scheme);
+      priceSimArray(i).simulatePrice();
+     });       
   }
   
   def calcOptionValue(): Double = {
